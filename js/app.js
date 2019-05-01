@@ -29,6 +29,7 @@ function showPosition(position) {
       "Longitude: " +
       position.coords.longitude
   );
+  initMap(position.coords.latitude, position.coords.longitude);
   document.getElementById("weather-container--Latitude").innerHTML = position.coords.latitude;
   document.getElementById("weather-container--Longitude").innerHTML = position.coords.longitude;
 
@@ -51,3 +52,36 @@ function showError(error) {
       break;
   }
 }
+
+function getCurrentDate() {
+    console.log(new Date())
+    document.getElementById('weather-current-date').innerHTML = formatDate(new Date());
+}
+
+function formatDate(date) {
+    var monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+  
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+  
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
+  }
+  
+/** Initialize map from google API */
+  function initMap(lat, lng) {
+    // The location of user
+    var currentPos = { lat: lat, lng: lng };
+    // The map, centered at Athens
+    var map = new google.maps.Map(document.getElementById("googleMap"), {
+      zoom: 15,
+      center: currentPos
+    });
+    // The marker, positioned at Athens
+    var marker = new google.maps.Marker({ position: currentPos, map: map });
+  }
