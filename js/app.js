@@ -24,7 +24,7 @@ var getCurrentLocation = function() {
 function showPosition(position) {
   // Success callback function
   getWeatherInformation(position.coords.latitude, position.coords.longitude); //get weather info
-  initMap(position.coords.latitude, position.coords.longitude); // initialize map
+//   initMap(position.coords.latitude, position.coords.longitude); // initialize map
   document.getElementById("weather-container--Latitude").innerHTML =
     position.coords.latitude;
   document.getElementById("weather-container--Longitude").innerHTML =
@@ -100,8 +100,22 @@ function initMap(lat, lng) {
 _dsSecret = "466a8f2a294a5c0b2507f45e5f1298f7"; //Again, for testing only, should be hidden in proxy
 var skycons = new Skycons({
   // Weather icons
-  color: "#ffec8b"
+  color: "#191919"
 });
+
+var ambientColors = {
+    "clear-day" : "#e47833",
+    "clear-night": "#c5eff7",
+    "rain": "#67809f",
+    "snow": "#dadfe1",
+    "sleet": "#abb7b7",
+    "wind" : "#34495e",
+    "fog": "#67809f",
+    "cloudy": "#2e3131",
+    "partly-cloudy-day": "#f4b350",
+    "partly-cloudy-night": "#123456"
+};
+
 function getWeatherInformation(geoLat, geoLng) {
   //API Variables
   var proxy = "https://cors-anywhere.herokuapp.com/";
@@ -122,6 +136,7 @@ function getWeatherInformation(geoLat, geoLng) {
         data.timezone;
       document.getElementById("wSummary").innerHTML = wSummary;
       document.getElementById("wTemp").innerHTML = wTemperature;
+      document.getElementById("weather-container").style.backgroundColor = ambientColors[data.currently.icon];
       skycons.add("wIcon", data.currently.icon);
     })
     //Error promise

@@ -14,7 +14,7 @@ body {
 .weather-container {
   height: 100vh;
   width: 100vw;
-  background-color: #6bb9f0;
+  /* background-color: #6bb9f0; */
   display: flex;
   flex-direction: column;
   justify-content: center;
