@@ -24,7 +24,7 @@ var getCurrentLocation = function() {
 function showPosition(position) {
   // Success callback function
   getWeatherInformation(position.coords.latitude, position.coords.longitude); //get weather info
-//   initMap(position.coords.latitude, position.coords.longitude); // initialize map
+  initMap(position.coords.latitude, position.coords.longitude); // initialize map
   document.getElementById("weather-container--Latitude").innerHTML =
     position.coords.latitude;
   document.getElementById("weather-container--Longitude").innerHTML =
