@@ -23,14 +23,8 @@ var getCurrentLocation = function() {
 
 function showPosition(position) {
   // Success callback function
-  console.log(
-    "Latitude: " +
-      position.coords.latitude +
-      "Longitude: " +
-      position.coords.longitude
-  );
-  fn_getWeatherByLL(position.coords.latitude, position.coords.longitude);
-//   initMap(position.coords.latitude, position.coords.longitude);
+  getWeatherInformation(position.coords.latitude, position.coords.longitude); //get weather info
+  initMap(position.coords.latitude, position.coords.longitude); // initialize map
   document.getElementById("weather-container--Latitude").innerHTML =
     position.coords.latitude;
   document.getElementById("weather-container--Longitude").innerHTML =
@@ -56,12 +50,13 @@ function showError(error) {
 }
 
 function getCurrentDate() {
-  console.log(new Date());
+  //Initialize the current date
   document.getElementById("weather-current-date").innerHTML = formatDate(
     new Date()
   );
 }
 
+// Format the currentDate
 function formatDate(date) {
   var monthNames = [
     "January",
@@ -103,29 +98,34 @@ function initMap(lat, lng) {
 // ---------------
 
 _dsSecret = "466a8f2a294a5c0b2507f45e5f1298f7"; //Again, for testing only, should be hidden in proxy
-
-function fn_getWeatherByLL(geoLat,geoLng){
+var skycons = new Skycons({
+  // Weather icons
+  color: "#ffec8b"
+});
+function getWeatherInformation(geoLat, geoLng) {
   //API Variables
-  var proxy = 'https://cors-anywhere.herokuapp.com/';
+  var proxy = "https://cors-anywhere.herokuapp.com/";
   var dsAPI = "https://api.darksky.net/forecast/";
   var dsKey = _dsSecret + "/";
   var dsParams = "?exclude=minutely,hourly,daily,alerts,flags&units=auto";
   //Concatenate API Variables into a URLRequest
-  var URLRequest = proxy + dsAPI + dsKey + String(geoLat) + "," + String(geoLng) + dsParams
+  var URLRequest =
+    proxy + dsAPI + dsKey + String(geoLat) + "," + String(geoLng) + dsParams;
   //Make the jQuery.getJSON request
-  $.getJSON( URLRequest )
+  $.getJSON(URLRequest)
     //Success promise
-    .done(function( data ) {
+    .done(function(data) {
+      //on success instatiate the data in the html template
       var wSummary = data.currently.summary;
       var wTemperature = data.currently.temperature;
-      console.log(wSummary);
-      console.log(wTemperature);
-      // lots of results available on the data object
-      // use the results to populate the GUI here
+      document.getElementById("weather-current-location").innerHTML =
+        data.timezone;
+      document.getElementById("wSummary").innerHTML = wSummary;
+      document.getElementById("wTemp").innerHTML = wTemperature;
+      skycons.add("wIcon", data.currently.icon);
     })
     //Error promise
     .fail(function() {
-      alert('Sorry, something bad happened when retrieving the weather');
-    }
-  );
+      alert("Sorry, something bad happened when retrieving the weather");
+    });
 }

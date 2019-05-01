@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,25 +20,32 @@
           <div class="inner"></div>
         </div>
       </div>
-      <p class="temp">72</p>
-      <p class="conditions">Sunny</p>
+      <div id="weather-info" class="weather-info">
+        <canvas id="wIcon" width="100" height="100"></canvas>
+        <div class="weatherSummary">
+          <div id="wSummary"></div>
+          <div id="temperatureGroup">
+            <span id="wTemp"></span><span>&deg;</span>
+          </div>
+        </div>
+      </div>
       <div class="weather-container-location">
         <div
           class="weather-container--Latitude"
           id="weather-container--Latitude"
         >
-          Athens, GR
+          lat
         </div>
         |
         <div
           class="weather-container--Longitude"
           id="weather-container--Longitude"
         >
-          Athens, GR
+          lang
         </div>
       </div>
 
-      <!-- <div id="googleMap"></div> -->
+      <div id="googleMap"></div>
     </div>
 
     <footer>
@@ -52,15 +58,13 @@
           >Alexandra Barka</a
         >
         | Weather data from
-        <a
-          href="https://www.wunderground.com/"
-          title="Wunderground.com"
-          target="_blank"
-          >Wunderground</a
+        <a href="https://darksky.net" title="darksky.net" target="_blank"
+          >Darksky</a
         >
       </p>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js"></script>
     <script src="js/app.js"></script>
     <script
       async

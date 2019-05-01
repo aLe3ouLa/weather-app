@@ -1,44 +1,75 @@
 /* General*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
+/* Container */
+
 .weather-container {
-    height: 100vh;
-    width: 100vw;
-    background-color: #6bb9f0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #6bb9f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .weather-container-location {
-    display: flex;
+  display: flex;
 }
 
 .location {
-    font-size: 2rem;
-    font-weight: bold;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .weather-container--title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* MAPS*/
+.weather-container--Latitude,
+.weather-container--Longitude {
+  font-size: 0.9rem;
+  color: #191919;
+}
+
+/* MAP api*/
 
 #googleMap {
-    margin-top: 16px;
-    width: 100%;
-    height: 20rem;
-  }
+  margin-top: 16px;
+  width: 100%;
+  height: 20rem;
+}
+
+/* Weather api*/
+
+.weather-info {
+  padding: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weatherSummary {
+  margin-left: 1.4rem;
+}
+
+#wSummary {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+#temperatureGroup {
+  padding-top: 2rem;
+  font-size: 2.6rem;
+}
