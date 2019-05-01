@@ -1,10 +1,29 @@
+/* General*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
+}
+
+.weather-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #6bb9f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-container-location {
+    display: flex;
+}
+
+.weather-container--title {
+    font-size: 2rem;
+    font-weight: bold;
 }

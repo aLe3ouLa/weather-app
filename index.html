@@ -4,10 +4,24 @@
     <head>
         <title>Weather App</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-        <link href="./css/style.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
     </head>
-    <body>
-        
-        <script src="./js/app.js"></script>
+    <body onload="getCurrentLocation();">
+        <h1>Hello world;</h1>
+        <div class="weather-container">
+            <div class="weather-container--title">
+                Athens, GR
+            </div>
+            <div class="weather-container-location">
+                <div class="weather-container--Latitude" id="weather-container--Latitude">
+                    Athens, GR
+                </div> | 
+                <div class="weather-container--Longitude" id="weather-container--Longitude">
+                    Athens, GR
+                </div>
+            </div>
+            
+        </div>
+        <script src="js/app.js"></script>
     </body>
 </html>
