@@ -104,16 +104,16 @@ var skycons = new Skycons({
 });
 
 var ambientColors = {
-    "clear-day" : "#e47833",
-    "clear-night": "#c5eff7",
-    "rain": "#67809f",
-    "snow": "#dadfe1",
+    "clear-day" : "#f2784b",
+    "clear-night": "#6bb9f0",
+    "rain": "#65c6bb",
+    "snow": "#ececec",
     "sleet": "#abb7b7",
-    "wind" : "#34495e",
+    "wind" : "#4b77be",
     "fog": "#67809f",
     "cloudy": "#2e3131",
-    "partly-cloudy-day": "#f4b350",
-    "partly-cloudy-night": "#123456"
+    "partly-cloudy-day": "#fff9de",
+    "partly-cloudy-night": "#89c4f4"
 };
 
 function getWeatherInformation(geoLat, geoLng) {
