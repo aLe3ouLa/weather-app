@@ -11,39 +11,42 @@
   </head>
   <body onload="getCurrentLocation();getCurrentDate();">
     <div class="weather-container" id="weather-container">
-      <div class="weather-container--title">
-        <h1 class="location" id="weather-current-location">Athens, GR</h1>
-        <h2 class="date" id="weather-current-date">May 1, 2019</h2>
+      <div class="weather-card">
+          <div class="weather-container--title">
+              <h1 class="location" id="weather-current-location">Athens, GR</h1>
+              <h2 class="date" id="weather-current-date">May 1, 2019</h2>
+            </div>
+            <div class="weather-container-icon">
+              <div class="sunny">
+                <div class="inner"></div>
+              </div>
+            </div>
+            <div id="weather-info" class="weather-info">
+              <canvas id="wIcon" width="100" height="100"></canvas>
+              <div class="weatherSummary">
+                <div id="wSummary"></div>
+                <div id="temperatureGroup">
+                  <span id="wTemp"></span><span>&deg;</span>
+                </div>
+              </div>
+            </div>
+            <div class="weather-container-location">
+              <div
+                class="weather-container--Latitude"
+                id="weather-container--Latitude"
+              >
+                lat
+              </div>
+              |
+              <div
+                class="weather-container--Longitude"
+                id="weather-container--Longitude"
+              >
+                lang
+              </div>
+            </div>
       </div>
-      <div class="weather-container-icon">
-        <div class="sunny">
-          <div class="inner"></div>
-        </div>
-      </div>
-      <div id="weather-info" class="weather-info">
-        <canvas id="wIcon" width="100" height="100"></canvas>
-        <div class="weatherSummary">
-          <div id="wSummary"></div>
-          <div id="temperatureGroup">
-            <span id="wTemp"></span><span>&deg;</span>
-          </div>
-        </div>
-      </div>
-      <div class="weather-container-location">
-        <div
-          class="weather-container--Latitude"
-          id="weather-container--Latitude"
-        >
-          lat
-        </div>
-        |
-        <div
-          class="weather-container--Longitude"
-          id="weather-container--Longitude"
-        >
-          lang
-        </div>
-      </div>
+      
 
       <div id="googleMap"></div>
     </div>

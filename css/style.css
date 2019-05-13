@@ -21,8 +21,23 @@ body {
   align-items: center;
 }
 
+.weather-card {
+  height: 20rem;
+  width: 30rem;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px #ddd;
+  padding: 1rem;
+}
+
+.date {
+  color: rgb(114, 69, 114);
+}
+
 .weather-container-location {
   display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 .location {
@@ -41,6 +56,7 @@ body {
 .weather-container--Longitude {
   font-size: 0.9rem;
   color: #191919;
+  text-align: center;
 }
 
 /* MAP api*/
