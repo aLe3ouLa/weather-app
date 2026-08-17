@@ -108,14 +108,14 @@ const params = {
     <Navbar />
     <Hero />
       {weatherData && (
-        <div style={{ display: "flex"}}>
-          <div>
+        <div style={{ display: "flex", gap: "16px"}}>
+          <div style={{display: "flex", gap: "16px", flexDirection: "column"}}>
         <CurrentWeather
           temperature={weatherData.current.temperature_2m}
           partOfDay={partOfDay}
         /> 
         <SecondaryInfo current={{...weatherData.current}} />
-        <DailyForecast /> 
+        <DailyForecast daily={{...weatherData.daily}} /> 
         </div>
         <HourlyForecast />
         </div>

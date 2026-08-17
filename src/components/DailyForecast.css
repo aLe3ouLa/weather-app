@@ -1,0 +1,24 @@
+.daily-forecast-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.daily-forecast-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.daily-forecast-box {
+    padding: 10px;
+    background-color: var( --transparent-box-bg);
+    border: 0.5px solid var(--neutral-300);
+    border-radius: 6px;
+}
+
+.min-max-temp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+

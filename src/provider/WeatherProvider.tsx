@@ -4,7 +4,7 @@ interface Weather { unit: "imperial" | "metric"; setUnit: (value: "imperial" | "
 
 const WeatherContext = createContext<Weather | undefined>(undefined)
 
-export const WeatherProvider = ({ children }) => {
+export const WeatherProvider = ({ children }: { children: React.ReactNode }) => {
     const [unit, setUnit] = useState<"imperial" | "metric">("metric");
     const [location, setLocation] = useState('Amsterdam');
 
