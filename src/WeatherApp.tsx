@@ -5,6 +5,9 @@ import { timeOfDay } from "./utils/timeOfDay";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { useWeather } from "./provider/WeatherProvider";
+import { SecondaryInfo } from "./components/SecondaryInfo";
+import { DailyForecast } from "./components/DailyForecast";
+import { HourlyForecast } from "./components/HourlyForecast";
 
 const url = "https://api.open-meteo.com/v1/forecast";
 
@@ -30,7 +33,7 @@ const params = {
     longitude: locationData?.[0]?.lon || 4.8897,
     daily: ["weather_code", "temperature_2m_max", "temperature_2m_min"],
     hourly: "temperature_2m",
-    current: "temperature_2m",
+    current: ["temperature_2m", "relative_humidity_2m", "precipitation", "apparent_temperature", "wind_speed_10m"],
   };
 
   const { data: responses } = useQuery({
@@ -55,7 +58,11 @@ const params = {
     current: {
       time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
       temperature_2m: current.variables(0)!.value(),
-    },
+      relative_humidity_2m: current.variables(1)!.value(),
+      precipitation: current.variables(2)!.value(),
+      apparent_temperature: current.variables(3)!.value(),
+      wind_speed_10m: current.variables(4)!.value(),
+	},
     hourly: {
       time: Array.from(
         {
@@ -70,6 +77,7 @@ const params = {
           ),
       ),
       temperature_2m: hourly.variables(0)!.valuesArray(),
+
     },
     daily: {
       time: Array.from(
@@ -100,17 +108,17 @@ const params = {
     <Navbar />
     <Hero />
       {weatherData && (
-        <>
+        <div style={{ display: "flex"}}>
+          <div>
         <CurrentWeather
           temperature={weatherData.current.temperature_2m}
           partOfDay={partOfDay}
         /> 
-         <div>
-            Max Temperature: {Math.round(weatherData.daily?.temperature_2m_max?.[0] || 0)}°C
-            <br />
-            Min Temperature: {Math.round(weatherData.daily?.temperature_2m_min?.[0] || 0)}°C
+        <SecondaryInfo current={{...weatherData.current}} />
+        <DailyForecast /> 
         </div>
-        </>
+        <HourlyForecast />
+        </div>
        )}
     </>
   );
