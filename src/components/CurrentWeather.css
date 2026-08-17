@@ -1,16 +1,10 @@
-.container {
-  padding: 16px;
-  position: relative;
-}
-
 .current-weather {
-  width: 300px;
-  height: 60vh;
+  width: 500px;
+  height: 200px;
   color: white;
-  background-color: #699bce;
-  border-radius: 8px;
+  background: url('src/assets/images/bg-today-large.svg');
+  background-repeat: no-repeat;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   position: relative;
@@ -23,7 +17,7 @@
 }
 
 .temperature {
-  font-size: 8rem;
+  font-size: 2rem;
   color: inherit;
   font-weight: bold;
   margin-top: 16px;
@@ -53,21 +47,4 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-}
-
-.cloud {
-  height: 100px; /* control the size */
-  aspect-ratio: 1.8;
-  --g: radial-gradient(50% 50%, #000 98%, #0000) no-repeat;
-  mask:
-    var(--g) 100% 100%/30% 60%,
-    var(--g) 70% 0/50% 100%,
-    var(--g) 0 100%/36% 68%,
-    var(--g) 27% 18%/26% 40%,
-    linear-gradient(#000 0 0) bottom/67% 58% no-repeat;
-  background: #d1ebff5a;
-  position: absolute;
-  top: 20%;
-  left: 30%;
-  transform: translate(-50%, -50%);
 }

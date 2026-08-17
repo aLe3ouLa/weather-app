@@ -1,16 +1,18 @@
 import { useState } from "react";
+import { useWeather } from "../provider/WeatherProvider";
 
-export const CountryInput = ({ setLocationQuery }: { setLocationQuery: (location: string) => void }) => {
-  const [location, setLocation] = useState<string>("");
+export const CountryInput = () => {
+  const [loc, setLoc] = useState<string>("");
+  const { setLocation } = useWeather()
 
   return (<>
     <input
       type="text"
       placeholder="Search for a place..."
-      value={location}
-      onChange={(e) => setLocation(e.target.value)}
+      value={loc}
+      onChange={(e) => setLoc(e.target.value)}
     />
-    <button type="button" onClick={() => setLocationQuery(location)}>Search</button>
+    <button type="button" onClick={() => setLocation(loc)}>Search</button>
     </>
   );
 };
