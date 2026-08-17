@@ -1,11 +1,13 @@
 import { createContext, useContext, useState } from "react";
 
-interface Weather { unit: "imperial" | "metric"; setUnit: (value: "imperial" | "metric") => void; location: string; setLocation: (location: string) => void }
+type Unit = "imperial" | "metric";
+
+interface Weather { unit: Unit; setUnit: (value: Unit) => void; location: string; setLocation: (location: string) => void }
 
 const WeatherContext = createContext<Weather | undefined>(undefined)
 
 export const WeatherProvider = ({ children }: { children: React.ReactNode }) => {
-    const [unit, setUnit] = useState<"imperial" | "metric">("metric");
+    const [unit, setUnit] = useState<Unit>("metric");
     const [location, setLocation] = useState('Amsterdam');
 
     return <WeatherContext.Provider value={{

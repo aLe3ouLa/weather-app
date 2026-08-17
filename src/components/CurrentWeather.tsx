@@ -16,14 +16,14 @@ export const CurrentWeather = ({
         className="current-weather"
       >
         <div>
-        <p className="location">{location}</p>
-        <p>{now.toISOString()}</p>
+          <p className="location">{location}</p>
+          <p>{now.toISOString()}</p>
         </div>
-        {/* {partOfDay === "MORNING" || partOfDay === "AFTERNOON" ? (
-          <div className="sun"></div>
+        {partOfDay === "MORNING" || partOfDay === "AFTERNOON" ? (
+          <img width="50" src="src/assets/images/icon-sunny.webp" alt="sunny" />
         ) : (
-          <div className="moon"></div>
-        )} */}
+          <img width="50" src="src/assets/images/icon-overcast.webp" alt="overcast" />
+        )}
         <p className="temperature">{Math.round(temperature)}°C</p>
       </article>
   );
