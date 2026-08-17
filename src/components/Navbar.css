@@ -1,0 +1,27 @@
+.nav-container {
+  height: 40px;
+  width: 100%;
+}
+
+.nav-container ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.dropdown-button {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  /* height: 20px; */
+  background-color: var(--neutral-100);
+  padding: 20px;
+  color: var(--neutral-0);
+  position: relative;
+}
