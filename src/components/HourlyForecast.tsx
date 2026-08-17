@@ -6,5 +6,23 @@ export const HourlyForecast = () => {
         <div>
             icons<span>3PM</span> 20
         </div>
+        <div>
+            icons<span>3PM</span> 20
+        </div>
+        <div>
+            icons<span>3PM</span> 20
+        </div>
+        <div>
+            icons<span>3PM</span> 20
+        </div>
+        <div>
+            icons<span>3PM</span> 20
+        </div>
+        <div>
+            icons<span>3PM</span> 20
+        </div>
+        <div>
+            icons<span>3PM</span> 20
+        </div>
     </article>)
 }
