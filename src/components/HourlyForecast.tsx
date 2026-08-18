@@ -1,4 +1,5 @@
 import { getWeatherIcon } from '../utils/weatherIcon';
+import { useWeather } from '../provider/WeatherProvider';
 import './HourlyForecast.css';
 
 export const HourlyForecast = ({ hourly }: {
@@ -8,6 +9,7 @@ export const HourlyForecast = ({ hourly }: {
         weather_code: Float32Array<ArrayBufferLike> | null;
     }
 }) => {
+    const { convertTemperature, temperatureUnit } = useWeather();
 
     const now = new Date();
     const currentIndex = Math.max(
@@ -33,7 +35,7 @@ export const HourlyForecast = ({ hourly }: {
                        <img width="20"  {...getWeatherIcon(hourly.weather_code?.at(index) || undefined)} />
                         <p>{displayHour}{period}</p>
                     </span>
-                    <p>{Math.round(hourly.temperature_2m?.at(index) || 0)}</p>
+                    <p>{Math.round(convertTemperature(hourly.temperature_2m?.at(index) || 0))}{temperatureUnit}</p>
                 </div>
             })
         }

@@ -1,10 +1,10 @@
 .current-weather {
-  width: 650px;
-  height: 240px;
+  width: 760px;
+  height: 260px;
   color: white;
   background: url('src/assets/images/bg-today-large.svg');
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size:contain;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -24,28 +24,4 @@
   margin-top: 16px;
   position: relative;
   z-index: 2;
-}
-
-.sun {
-  width: 160px;
-  height: 160px;
-  background-color: rgba(238, 219, 52, 0.749);
-  border-radius: 50%;
-  position: absolute;
-  top: 62%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.moon {
-  width: 130px;
-  height: 130px;
-  background-color: rgba(173, 173, 173, 0.777);
-  border-radius: 50%;
-  position: absolute;
-  top: 62%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
 }

@@ -1,4 +1,5 @@
 import { getWeatherIcon } from '../utils/weatherIcon';
+import { useWeather } from '../provider/WeatherProvider';
 import './DailyForecast.css';
 
 const Days: Record<number, string> = {
@@ -17,6 +18,7 @@ export const DailyForecast = ({daily}: {daily: {
     temperature_2m_max: Float32Array<ArrayBufferLike> | null;
     temperature_2m_min: Float32Array<ArrayBufferLike> | null;
 }}) => {
+    const { convertTemperature, temperatureUnit } = useWeather();
 
     return (
         <article className="daily-forecast-wrapper">
@@ -27,8 +29,8 @@ export const DailyForecast = ({daily}: {daily: {
                 <p>{Days[d.getDay()]}</p>
                 <img width="50" {...getWeatherIcon(daily.weather_code?.at(index) || undefined)} />
                 <div className="min-max-temp">
-                    <p>{Math.round(daily?.temperature_2m_min?.[index] || 0)}</p>
-                     <p>{Math.round(daily?.temperature_2m_max?.[index] || 0)}</p>
+                    <p>{Math.round(convertTemperature(daily?.temperature_2m_min?.[index] || 0))}{temperatureUnit}</p>
+                     <p>{Math.round(convertTemperature(daily?.temperature_2m_max?.[index] || 0))}{temperatureUnit}</p>
                 </div>
             </div>)
                 })}

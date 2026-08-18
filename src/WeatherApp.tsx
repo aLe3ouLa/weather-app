@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchWeatherApi } from "openmeteo";
 import { CurrentWeather } from "./components/CurrentWeather";
-import { timeOfDay } from "./utils/timeOfDay";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { useWeather } from "./provider/WeatherProvider";
@@ -34,7 +33,7 @@ const params = {
     longitude: locationData?.[0]?.lon || 4.8897,
     daily: ["weather_code", "temperature_2m_max", "temperature_2m_min"],
     hourly: ["temperature_2m", "weather_code"],
-    current: ["temperature_2m", "relative_humidity_2m", "precipitation", "apparent_temperature", "wind_speed_10m"],
+    current: ["temperature_2m", "relative_humidity_2m", "precipitation", "apparent_temperature", "wind_speed_10m", "weather_code"],
   };
 
   const { data: responses, error } = useQuery({
@@ -67,6 +66,7 @@ const params = {
       precipitation: current.variables(2)!.value(),
       apparent_temperature: current.variables(3)!.value(),
       wind_speed_10m: current.variables(4)!.value(),
+      weather_code: current.variables(5)!.value(),
 	},
     hourly: {
       time: Array.from(
@@ -103,8 +103,6 @@ const params = {
     },
   };
 
-  const partOfDay = locationData?.[0]?.lon !== undefined ? timeOfDay(locationData[0].lon) : "MORNING";
-
   if (isLocationLoading) {
     return <div>Loading location...</div>;
   }
@@ -118,7 +116,7 @@ const params = {
           <div style={{display: "flex", gap: "16px", flexDirection: "column"}}>
         <CurrentWeather
           temperature={weatherData.current.temperature_2m}
-          partOfDay={partOfDay}
+          weather_code={weatherData.current.weather_code}
         /> 
         <SecondaryInfo current={{...weatherData.current}} />
         <DailyForecast daily={{...weatherData.daily}} /> 

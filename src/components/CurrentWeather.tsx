@@ -1,15 +1,15 @@
 import { useWeather } from "../provider/WeatherProvider";
-import type { TimeOfDay } from "../utils/timeOfDay";
+import { getWeatherIcon } from "../utils/weatherIcon";
 import "./CurrentWeather.css";
 
 export const CurrentWeather = ({
   temperature,
-  partOfDay,
+  weather_code,
 }: {
   temperature: number;
-  partOfDay: (typeof TimeOfDay)[keyof typeof TimeOfDay];
+  weather_code:  number | undefined;
 }) => {
-  const { location} = useWeather();
+  const { location, convertTemperature, temperatureUnit } = useWeather();
   const now = new Date();
   return (
       <article
@@ -19,12 +19,10 @@ export const CurrentWeather = ({
           <p className="location">{location}</p>
           <p>{now.toISOString()}</p>
         </div>
-        {partOfDay === "MORNING" || partOfDay === "AFTERNOON" ? (
-          <img width="50" src="src/assets/images/icon-sunny.webp" alt="sunny" />
-        ) : (
-          <img width="50" src="src/assets/images/icon-overcast.webp" alt="overcast" />
-        )}
-        <p className="temperature">{Math.round(temperature)}°C</p>
+        <img width="50"  {...getWeatherIcon(weather_code)}/>
+        <p className="temperature">
+          {Math.round(convertTemperature(temperature))}{temperatureUnit}
+        </p>
       </article>
   );
 };
