@@ -1,0 +1,33 @@
+.hourly-forecast {
+    padding: 10px;
+    background-color: var( --transparent-box-bg);
+    border: 0.5px solid var(--neutral-300);
+    border-radius: 6px;
+}
+
+.hourly-forecast-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hourly-forecast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hourly-forecast-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
+    background-color: var( --transparent-box-bg);
+    border: 0.5px solid var(--neutral-300);
+    border-radius: 6px;
+}
+
+.hourly-forecast-time-icon {
+    display: flex;
+}

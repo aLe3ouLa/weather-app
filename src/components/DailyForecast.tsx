@@ -1,3 +1,4 @@
+import { getWeatherIcon } from '../utils/weatherIcon';
 import './DailyForecast.css';
 
 const Days: Record<number, string> = {
@@ -17,16 +18,14 @@ export const DailyForecast = ({daily}: {daily: {
     temperature_2m_min: Float32Array<ArrayBufferLike> | null;
 }}) => {
 
-    console.log(daily)
     return (
         <article className="daily-forecast-wrapper">
             <h2>Daily Forecast</h2>
             <div className="daily-forecast-container">
                 {daily.time.map((d, index) => {
-                    console.log(d)
                     return (<div className="daily-forecast-box" key={d.getDate()}>
                 <p>{Days[d.getDay()]}</p>
-                <p>icons</p>
+                <img width="50" {...getWeatherIcon(daily.weather_code?.at(index) || undefined)} />
                 <div className="min-max-temp">
                     <p>{Math.round(daily?.temperature_2m_min?.[index] || 0)}</p>
                      <p>{Math.round(daily?.temperature_2m_max?.[index] || 0)}</p>

@@ -8,6 +8,7 @@ import { useWeather } from "./provider/WeatherProvider";
 import { SecondaryInfo } from "./components/SecondaryInfo";
 import { DailyForecast } from "./components/DailyForecast";
 import { HourlyForecast } from "./components/HourlyForecast";
+import { ErrorState } from "./components/ErrorState";
 
 const url = "https://api.open-meteo.com/v1/forecast";
 
@@ -32,11 +33,11 @@ const params = {
     latitude: locationData?.[0]?.lat || 52.374,
     longitude: locationData?.[0]?.lon || 4.8897,
     daily: ["weather_code", "temperature_2m_max", "temperature_2m_min"],
-    hourly: "temperature_2m",
+    hourly: ["temperature_2m", "weather_code"],
     current: ["temperature_2m", "relative_humidity_2m", "precipitation", "apparent_temperature", "wind_speed_10m"],
   };
 
-  const { data: responses } = useQuery({
+  const { data: responses, error } = useQuery({
     queryKey: ["weather", params],
     queryFn: async () => await fetchWeatherApi(url, params),
     enabled: params.latitude !== undefined && params.longitude !== undefined,
@@ -49,11 +50,15 @@ const params = {
     return <div>Loading...</div>;
   }
 
+  if (error) {
+    return <ErrorState />
+  }
+
   const utcOffsetSeconds = response?.utcOffsetSeconds() || 0;
   const current = response.current()!;
   const hourly = response.hourly()!;
   const daily = response.daily()!;
-  // Note: The order of weather variables in the URL query and the indices below need to match!
+
   const weatherData = {
     current: {
       time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
@@ -77,6 +82,7 @@ const params = {
           ),
       ),
       temperature_2m: hourly.variables(0)!.valuesArray(),
+      weather_code: hourly.variables(1)!.valuesArray(),
 
     },
     daily: {
@@ -117,7 +123,7 @@ const params = {
         <SecondaryInfo current={{...weatherData.current}} />
         <DailyForecast daily={{...weatherData.daily}} /> 
         </div>
-        <HourlyForecast />
+        <HourlyForecast hourly={{...weatherData.hourly }} />
         </div>
        )}
     </>
