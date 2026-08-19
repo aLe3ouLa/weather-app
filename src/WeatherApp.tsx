@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchWeatherApi } from "openmeteo";
 import { CurrentWeather } from "./components/CurrentWeather";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
@@ -8,53 +6,28 @@ import { DailyForecast } from "./components/DailyForecast";
 import { HourlyForecast } from "./components/HourlyForecast";
 import { ErrorState } from "./components/ErrorState";
 import { transformToWeatherData } from "./utils/transformToWeatherData";
-import { useLocationData } from "./queries/useLocationData";
-
-const url = "https://api.open-meteo.com/v1/forecast";
+import { useWeatherData } from "./queries/useWeatherData";
 
 export const WeatherApp = () => {
-  const { data: locationData, isLoading: isLocationLoading } =
-    useLocationData();
-
-  const params = {
-    latitude: locationData?.lat || 52.374,
-    longitude: locationData?.lon || 4.8897,
-    daily: ["weather_code", "temperature_2m_max", "temperature_2m_min"],
-    hourly: ["temperature_2m", "weather_code"],
-    current: [
-      "temperature_2m",
-      "relative_humidity_2m",
-      "precipitation",
-      "apparent_temperature",
-      "wind_speed_10m",
-      "weather_code",
-    ],
-  };
 
   const {
     data: weather,
     isLoading,
     error,
-  } = useQuery({
-    queryKey: ["weather", params],
-    queryFn: async () => await fetchWeatherApi(url, params),
-    enabled: params.latitude !== undefined && params.longitude !== undefined,
-    select: (data) => data?.[0],
-  });
+  } = useWeatherData();
 
   const weatherData = transformToWeatherData(weather);
 
-  if (!weather || isLoading || isLocationLoading) {
+  if (!weather || isLoading ) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (!error) {
     return <ErrorState />;
   }
 
   return (
     <>
-      <Navbar />
       <Hero />
       {weatherData && (
         <div style={{ display: "flex", gap: "16px" }}>

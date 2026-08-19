@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css'
 import { WeatherApp } from './WeatherApp';
 import { WeatherProvider } from './provider/WeatherProvider';
+import { Navbar } from './components/Navbar';
 
 const queryClient = new QueryClient();
 
@@ -11,13 +12,15 @@ function App() {
 
 
   return (
-    <article id="main-container">
+    
       <WeatherProvider>
         <QueryClientProvider client={queryClient}>
-          <WeatherApp />
+          <Navbar />
+          <article id="main-container">
+            <WeatherApp />
+          </article>
         </QueryClientProvider>
       </WeatherProvider>
-    </article>
   )
 }
 
