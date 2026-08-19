@@ -8,6 +8,7 @@ import { SecondaryInfo } from "./components/SecondaryInfo";
 import { DailyForecast } from "./components/DailyForecast";
 import { HourlyForecast } from "./components/HourlyForecast";
 import { ErrorState } from "./components/ErrorState";
+import { transformToWeatherData } from "./utils/transformToWeatherData";
 
 const url = "https://api.open-meteo.com/v1/forecast";
 
@@ -36,75 +37,21 @@ const params = {
     current: ["temperature_2m", "relative_humidity_2m", "precipitation", "apparent_temperature", "wind_speed_10m", "weather_code"],
   };
 
-  const { data: responses, error } = useQuery({
+  const { data: weather, isLoading, error } = useQuery({
     queryKey: ["weather", params],
     queryFn: async () => await fetchWeatherApi(url, params),
     enabled: params.latitude !== undefined && params.longitude !== undefined,
+    select: (data) => data?.[0]
   });
 
-  // Process first location. Add a for-loop for multiple locations or weather models
-  const response = responses?.[0];
+  const weatherData = transformToWeatherData(weather);
 
-  if (!response) {
+  if (!weather || isLoading || isLocationLoading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
     return <ErrorState />
-  }
-
-  const utcOffsetSeconds = response?.utcOffsetSeconds() || 0;
-  const current = response.current()!;
-  const hourly = response.hourly()!;
-  const daily = response.daily()!;
-
-  const weatherData = {
-    current: {
-      time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
-      temperature_2m: current.variables(0)!.value(),
-      relative_humidity_2m: current.variables(1)!.value(),
-      precipitation: current.variables(2)!.value(),
-      apparent_temperature: current.variables(3)!.value(),
-      wind_speed_10m: current.variables(4)!.value(),
-      weather_code: current.variables(5)!.value(),
-	},
-    hourly: {
-      time: Array.from(
-        {
-          length:
-            (Number(hourly.timeEnd()) - Number(hourly.time())) /
-            hourly.interval(),
-        },
-        (_, i) =>
-          new Date(
-            (Number(hourly.time()) + i * hourly.interval() + utcOffsetSeconds) *
-              1000,
-          ),
-      ),
-      temperature_2m: hourly.variables(0)!.valuesArray(),
-      weather_code: hourly.variables(1)!.valuesArray(),
-
-    },
-    daily: {
-      time: Array.from(
-        {
-          length:
-            (Number(daily.timeEnd()) - Number(daily.time())) / daily.interval(),
-        },
-        (_, i) =>
-          new Date(
-            (Number(daily.time()) + i * daily.interval() + utcOffsetSeconds) *
-              1000,
-          ),
-      ),
-      weather_code: daily.variables(0)!.valuesArray(),
-      temperature_2m_max: daily.variables(1)!.valuesArray(),
-      temperature_2m_min: daily.variables(2)!.valuesArray(),
-    },
-  };
-
-  if (isLocationLoading) {
-    return <div>Loading location...</div>;
   }
 
   return (
