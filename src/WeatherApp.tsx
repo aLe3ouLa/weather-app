@@ -1,12 +1,23 @@
-import { CurrentWeather } from "./components/CurrentWeather";
-import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
-import { SecondaryInfo } from "./components/SecondaryInfo";
+import { CurrentCityInfo } from "./components/CurrentCityInfo";
 import { DailyForecast } from "./components/DailyForecast";
 import { HourlyForecast } from "./components/HourlyForecast";
 import { ErrorState } from "./components/ErrorState";
 import { transformToWeatherData } from "./utils/transformToWeatherData";
 import { useWeatherData } from "./queries/useWeatherData";
+
+const now = Date.now();
+const placeholderDaily = {
+  time: Array.from({ length: 7 }, (_, i) => new Date(now + i * 86_400_000)),
+  weather_code: null,
+  temperature_2m_max: null,
+  temperature_2m_min: null,
+};
+const placeholderHourly = {
+  time: Array.from({ length: 8 }, (_, i) => new Date(now + i * 3_600_000)),
+  temperature_2m: null,
+  weather_code: null,
+};
 
 export const WeatherApp = () => {
 
@@ -14,36 +25,33 @@ export const WeatherApp = () => {
     data: weather,
     isLoading,
     error,
+    refetch
   } = useWeatherData();
 
   const weatherData = transformToWeatherData(weather);
 
-  if (!weather || isLoading ) {
-    return <div>Loading...</div>;
-  }
-
-  if (!error) {
-    return <ErrorState />;
+  if (error) {
+    return (
+      <>
+        <Hero />
+        <ErrorState refetch={refetch} />
+      </>
+    );
   }
 
   return (
     <>
       <Hero />
-      {weatherData && (
-        <div style={{ display: "flex", gap: "16px" }}>
-          <div
-            style={{ display: "flex", gap: "16px", flexDirection: "column" }}
-          >
-            <CurrentWeather
-              temperature={weatherData.current.temperature_2m}
-              weather_code={weatherData.current.weather_code}
-            />
-            <SecondaryInfo current={{ ...weatherData.current }} />
-            <DailyForecast daily={{ ...weatherData.daily }} />
-          </div>
-          <HourlyForecast hourly={{ ...weatherData.hourly }} />
+      <div
+        style={{ display: "grid", gap: "26px", gridTemplateColumns: "2fr 1fr", padding: "0 60px", opacity: isLoading ? 0.5 : 1 }}
+        aria-busy={isLoading}
+      >
+        <div style={{ display: "flex", gap: "26px", flexDirection: "column" }}>
+          <CurrentCityInfo current={weatherData ? { ...weatherData.current } : undefined} />
+          <DailyForecast daily={weatherData ? { ...weatherData.daily } : placeholderDaily} />
         </div>
-      )}
+        <HourlyForecast hourly={weatherData ? { ...weatherData.hourly } : placeholderHourly} />
+      </div>
     </>
   );
 };

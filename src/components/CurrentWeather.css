@@ -1,5 +1,5 @@
 .current-weather {
-  width: 760px;
+  width: 100%;
   height: 260px;
   color: white;
   background: url('src/assets/images/bg-today-large.svg');

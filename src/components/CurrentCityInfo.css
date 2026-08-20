@@ -1,13 +1,19 @@
+.current-city-weather {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .secondary-info-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 20px;
 }
 
 .secondary-info-container {
     padding: 10px;
     background-color: var( --transparent-box-bg);
-    border: 0.5px solid var(--neutral-300);
+    border: 0.5px solid var(--neutral-600);
     border-radius: 6px;
 
     display: flex;

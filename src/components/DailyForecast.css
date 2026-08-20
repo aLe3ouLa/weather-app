@@ -3,16 +3,25 @@
     flex-direction: column;
 }
 
+.daily-forecast-wrapper h2 {
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
 .daily-forecast-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
 }
 
+.daily-forecast-container p {
+    font-size: 16px;
+}
+
 .daily-forecast-box {
     padding: 10px;
     background-color: var( --transparent-box-bg);
-    border: 0.5px solid var(--neutral-300);
+    border: 0.5px solid var(--neutral-600);
     border-radius: 6px;
 }
 
@@ -22,3 +31,6 @@
     justify-content: space-between;
 }
 
+.min-max-temp p {
+    font-size: 12px;
+}
