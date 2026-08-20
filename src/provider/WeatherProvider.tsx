@@ -35,7 +35,7 @@ export const WeatherProvider = ({ children }: { children: React.ReactNode }) => 
         convertTemperature: (celsius) => isImperial ? celsiusToFahrenheit(celsius) : celsius,
         convertWindSpeed: (kmh) => isImperial ? kmhToMph(kmh) : kmh,
         convertPrecipitation: (mm) => isImperial ? mmToInches(mm) : mm,
-        temperatureUnit: isImperial ? "°F" : "°C",
+        temperatureUnit: isImperial ? "°" : "°",
         windSpeedUnit: isImperial ? "mph" : "km/h",
         precipitationUnit: isImperial ? "in" : "mm",
     }), [unit, location, isImperial]);

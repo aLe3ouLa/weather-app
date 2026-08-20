@@ -15,9 +15,16 @@ export const CurrentWeather = ({
       <article
         className="current-weather"
       >
-        <div>
+        <div className="current-weather-info">
           <p className="location">{location}</p>
-          <p>{now.toISOString()}</p>
+          <p>
+            {now.toLocaleDateString("en-GB", {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </p>
         </div>
         <img width="50"  {...getWeatherIcon(weather_code)}/>
         <p className="temperature">

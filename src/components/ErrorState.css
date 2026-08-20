@@ -1,24 +1,24 @@
 .error-state-container {
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 
-    margin-top: 36px;
+  margin-top: 36px;
 }
 
 .error-state-description {
-    color: var(--neutral-200);
+  color: var(--neutral-200);
 }
 
 .retry-button {
-    background-color: var( --transparent-box-bg);
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border-radius: 8px;
+  background-color: var(--transparent-box-bg);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
 }
