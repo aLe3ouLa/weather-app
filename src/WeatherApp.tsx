@@ -32,10 +32,7 @@ export const WeatherApp = () => {
 
   if (error) {
     return (
-      <>
-        <Hero />
         <ErrorState refetch={refetch} />
-      </>
     );
   }
 

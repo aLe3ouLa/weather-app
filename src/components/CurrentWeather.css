@@ -5,9 +5,10 @@
   background: url('src/assets/images/bg-today-large.svg');
   background-repeat: no-repeat;
   background-size:contain;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-evenly;
+  justify-items: center;
   position: relative;
 }
 
